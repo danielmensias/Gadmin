@@ -1,0 +1,93 @@
+{% extends 'base/base.html'%}
+<meta charset="UTF-8">
+
+{% block content%}
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-md-3 col-sm-3">
+			<div class="contenedor">
+<!-- 			tambien funciona asi -->
+				<img src="../../static/img/razas.jpg">
+				<div class="tr">
+					
+				</div>
+				<div class="acciones">
+					<a href="{%url 'configuracion:raza_crear'%} "data-toggle="ayuda" title="Crear" class="fa fa-file"></a>
+					<a href="{%url 'configuracion:raza_listar'%}" data-toggle="ayuda" title="Listar"class="fa fa-eye"></a>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="contenedor">
+				<img src="{{MEDIA_URL}}{{'rodeos.jpg'}}">
+				<div class="tr">
+				</div>
+				<div class="acciones">
+					<a href="{%url 'configuracion:tipo_crear'%}" data-toggle="ayuda" title="Crear" class="fa fa-file"></a>
+					<a href="{%url 'configuracion:tipo_listar'%}" data-toggle="ayuda" title="Listar" class="fa fa-eye"></a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3 col-sm-3">
+			<div class="contenedor">
+				<img src="{{MEDIA_URL}}{{'eventosc.jpg'}}">
+				<div class="tr">
+				</div>
+				<div class="acciones">
+					<a href="{%url 'configuracion:reg_crear'%}" data-toggle="ayuda" title="Crear" class="fa fa-file"></a>
+					<a href="{%url 'configuracion:reg_listar'%}" data-toggle="ayuda" title="Listar" class="fa fa-eye"></a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="contenedor">
+				<img src="{{MEDIA_URL}}{{'vacuna.jpg'}}">
+				<div class="tr">
+				</div>
+				<div class="acciones">
+					<a href="{%url 'configuracion:vacu_crear'%}" data-toggle="ayuda" title="Crear" class="fa fa-file"></a>
+					<a href="{%url 'configuracion:vacu_listar'%}" data-toggle="ayuda" title="Listar" class="fa fa-eye"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3 col-sm-3">
+			<div class="contenedor">
+				<img src="{{MEDIA_URL}}{{'tecnico.jpg'}}">
+				<div class="tr">
+				</div>
+				<div class="acciones">
+					<a href="{%url 'configuracion:tec_crear'%}" data-toggle="ayuda" title="Crear" class="fa fa-file"></a>
+					<a href="{%url 'configuracion:tec_listar'%}" data-toggle="ayuda" title="Listar" class="fa fa-eye"></a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="contenedor">
+				<img src="{{MEDIA_URL}}{{'toro.jpg'}}">
+				<div class="tr">
+					<p class="texto">TOROS</p>
+				</div>
+				<div class="acciones">
+					<a href="{%url 'animal:toro_crear'%}" data-toggle="ayuda" title="Crear" class="fa fa-file"></a> <a
+						href="{%url 'animal:toro_listar'%}" data-toggle="ayuda" title="Listar" class="fa fa-eye"></a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+{%endblock%}
+{%block js%}
+	
+<script>
+$(document).ready(function(){
+    $('[data-toggle="ayuda"]').tooltip();
+});
+</script>
+{%endblock%}

@@ -1,0 +1,57 @@
+{% extends 'base/base.html'%}
+<meta charset="UTF-8">
+{%block extrastatic%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+{%endblock%}
+
+{%block content%}
+<div id="page-wrapper">
+<div class="row">
+	<div class="col-md-8 col-sm-8 col-md-offset-2">                        
+		<table class="table table-bordered">
+			<thead>
+				<tr class="success" align="center">
+					<td>Id</td>
+					<td>Volumen</td>
+					<td>Fecha produccion</td>
+				</tr>
+			</thead>
+			<tbody>
+				{%if prod%}
+				{%for i in prod%}
+				<tr class="active" align="center">
+					<td align="left">{{i.id_animal.id}}</td>
+					<td>{{i.volumen}}</td>
+					<td>{{i.fecha_produccion}}</td>									
+				</tr>
+				{%endfor%}
+				{%else%}
+				<h1>No hay registros de animales</h1>
+				{%endif%}
+			</tbody>
+		</table>	
+		<canvas id="myChart"></canvas>
+	</div>	
+</div> 
+</div>
+
+		
+	<script>
+	    (function() {
+	        var ctx = document.getElementById('myChart').getContext('2d');
+	        var chart = new Chart(ctx, {
+	            type: 'bar',
+	            data: {
+	                labels: [{% for i in prod %} "{{ i.id_animal }}", {% endfor %}],
+	                datasets: [{
+	                    label: 'Produccion',
+	                    data: [{% for item_value in prod %} {{ item_value.volumen }}, {% endfor %}]
+	                }]
+	            },	            
+	        });
+	    })();
+	</script>
+	
+
+
+{%endblock%}

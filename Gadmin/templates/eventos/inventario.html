@@ -1,0 +1,69 @@
+{% extends 'base/base.html'%}
+<meta charset="UTF-8">
+{%block extrastatic%}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+{%endblock%}
+
+
+
+{% block content%}
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="box box-secondary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Animales</h3>
+				</div>
+				<div class="box-body">
+					<div>
+						<canvas id="Animales"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{%endblock%}
+
+{%block js%}
+	<script>
+	    (function() {
+	        var ctx = document.getElementById('Animales').getContext('2d');
+	        var chart = new Chart(ctx, {
+	            type: 'bar',
+	            data: {
+	            	            
+	                labels: [{% for i in animales %} "{{ i.nombre }}", {% endfor %}],
+	                datasets: [{
+	                    label: 'Animales registrados',
+	                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+	                    data: [{% for item_value in animales %} {{ item_value.peso_inicial }}, {% endfor %}]
+	                }],
+	            },
+	                options : {
+		                scales: {
+		                  yAxes: [{
+		                    scaleLabel: {
+		                      display: true,
+		                      labelString: 'Peso (Kg)'
+		                    }
+		                  }],
+		                  xAxes: [{
+			                    scaleLabel: {
+			                      display: true,
+			                      labelString: 'Nombre animal'
+			                    }
+			                  }]
+		                }
+		              }
+
+	        
+	            	            
+	        });
+	    })();
+	</script>
+
+{%endblock%}
+
+

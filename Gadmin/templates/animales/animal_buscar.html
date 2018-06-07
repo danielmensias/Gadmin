@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+<meta charset="UTF-8">
+{%block title%}Animales{%endblock%} {%block content%}
+<div id="page-wrapper">
+	<div class="row">
+		<div class="box box-secondary">
+			<div class="box-header with-border">
+				<div class="box-title">Listado animales</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table" id="tabla">
+					<thead>
+						<tr align="center">
+							<td>Id</td>
+							<td>Nombre</td>
+							<td>Fecha nacimiento</td>
+							<td>Peso inicial(Kg)</td>
+							<td>Raza</td>
+							<td>Tipo</td>
+							<td>Acciones</td>
+						</tr>
+					</thead>
+					<tbody>
+						{%if object_list%} {%for animal in object_list%}
+						<tr align="center">
+							<td align="left">{{animal.id}}</td>
+							<td>{{animal.nombre}}</td>
+							<td>{{animal.fechanacimiento}}</td>
+							<td>{{animal.peso_inicial}}</td>
+							<td>{{animal.raza.nombre}}</td>
+							<td>{{animal.tipo.nombre}}</td>
+							<td>
+								<a class="btn btn-primary" href="{%url 'animal:ani_editar' animal.id%}">Editar</a>
+								<a class="btn btn-danger" href="{%url 'animal:ani_borrar' animal.id%}">Eliminar</a>
+							</td>
+						</tr>
+						{%endfor%} {%else%}
+						<h1>No hay registros de animales</h1>
+						{%endif%}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- <script>
+function abrir_modal(url)
+{
+        $('#popup').load(url, function()
+        {
+                $(this).modal('show');
+        });
+        return false;
+}
+
+function cerrar_modal()
+{
+        $('#popup').modal('hide');
+        return false;
+}
+</script>  -->
+</div>
+{% endblock %}

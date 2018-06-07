@@ -1,0 +1,35 @@
+<!-- login.html -->
+<html>
+{%load staticfiles%}
+<head>
+	<meta charset="UTF-8">
+    <title>Ingresar - Gadmin</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head> 
+<body>
+    <div class="wrapper">
+        <div class="container">
+        {%block contenido%}
+        	<h1>
+        		<img src="{{MEDIA_URL}}{{'icono.png'}}" width="150px">        		
+        	</h1>
+        	<h1>Software administración de ganado</h1>
+            {% if form.errors %}
+        		<p>El usuario y la contraseña no coinciden, Por favor intentelo de nuevo</p>
+    		{% endif %}    
+		    <form class="form" method="post" action="." >{% csrf_token %}
+		        <input type="text" placeholder="Nombre de usuario" name="username">
+		        <input type="password" placeholder="Contraseña" name="password">
+		        <div>
+		        <a href="{%url 'reseteopassword'%}" class=help-block>Olvidaste tu contraseña</a>
+		        </div>		        
+		        <button type="submit"  value="Login" id="login-button">Ingresar</button>
+		    </form>  
+		    {%endblock%}          
+        </div>
+    </div>
+</body>
+</html>
+
+    
+

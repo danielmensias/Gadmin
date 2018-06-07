@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="es">
+{%load staticfiles%}
+<head>
+<meta charset="UTF-8">
+<!-- 	codigo para que funcione el dropdown en el navbar -->
+<script src="{% static 'js/jquery-1.11.1.min.js'%}"></script>
+<script src="{% static 'js/Funciones.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<link href="{% static 'css/bootstrap.css'%}" rel="stylesheet" />
+<link href="{% static 'css/font-awesome.css'%}"	rel="stylesheet" />
+
+<!-- 	carga de archivo estatico con estilo para la seccion de configuracion y home -->
+<link rel="stylesheet" href="{% static 'css/estilo_conf.css' %}">
+<link href="{% static 'css/style.css'%}" rel="stylesheet" />
+<link href="{% static 'css/main-style.css'%}" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/datatables.min.css'%}">
+
+
+<title>{%block title%}Home{%endblock%} - Gadmin</title>
+</head>
+
+
+<body>
+	{%block extrastatic%} {%endblock%} {% block navbar %}
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
+			id="navbar">
+			<!-- navbar-header -->
+			<div class="navbar-header">
+				<a class="navbar-brand">GADMIN</a>
+			</div>
+			<!-- end navbar-header -->
+			<!-- navbar-top-links -->
+			<ul class="nav navbar-top-links navbar-right">
+				<!-- main dropdown -->
+				<li><a href="{% url 'configuracion:conf_base' %}" ><i
+								class="fa fa-tasks fa-2x" data-toggle="ayuda" data-placement="bottom" title="Variables"></i></a></li>
+				
+				<li class="dropdown"><a href="{%url 'usuario:notificacion'%}"><i class="fa fa-bell fa-2x" data-toggle="ayuda" data-placement="bottom" title="Notificaciones">
+						</i>
+				</a> 
+
+				<li class="dropdown"><a class="dropdown-toggle"
+					href="#" data-toggle="dropdown" data-toggle="ayuda" data-placement="bottom" title="Usuario"> <i class="fa fa-user fa-2x"></i>
+				</a> <!-- dropdown user-->
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="{%url 'usuario:perfil' user.id%}"><i class="fa fa-user fa-fw"></i>Perfil de
+								usuario</a></li>
+								{%if user.is_staff%}
+						<li><a href="{%url 'admin:index'%}"><i class="fa fa-briefcase fa-fw"></i>Administrador</a></li>
+								{%endif%}
+						<li class="divider"></li>
+						<li><a href="{%url 'salir'%}"><i class="fa fa-sign-out fa-fw"></i>Salir</a></li>
+					</ul> <!-- end dropdown-user --></li>
+				<!-- end main dropdown -->
+			</ul>
+			<!-- end navbar-top-links -->
+
+		</nav>
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<!-- sidebar-collapse -->
+			<div class="sidebar-collapse">
+				<!-- side-menu -->
+				<ul class="nav" id="side-menu">
+					<li>
+						<!--seccion usuario-->
+						<div class="user-section">
+							<div class="user-section-inner">
+								<img src="{% static '/img/iconos/user.png'%}">
+							</div>
+							<div class="user-info">
+								<div>
+									<strong>{{user.username| capfirst}}</strong>
+								</div>								
+							</div>
+						</div> <!--fin seccion usuario-->
+					</li>
+					<li><a href="{%url 'home'%}"><i class="fa fa fa-home"></i>
+							Home</a></li>							                  
+                    
+					<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
+							Animales<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="{% url 'animal:ani_crear' %}"><i
+									class="fa fa-pencil-square-o"></i> Registrar Animal</a></li>
+									<li><a href="{% url 'animal:toro_crear' %}"><i
+									class="fa fa-pencil-square-o"></i> Registrar Toro</a></li>
+							<li><a href="{% url 'animal:ani_buscar' %}"><i
+									class="fa fa-search"></i> Buscar Animal</a></li>
+						</ul> <!-- second-level-items --></li>
+					<li><a href="{%url 'animal:ani_listar'%}"><i
+							class="fa fa-flask fa-fw"></i> Eventos</a></li>
+					<li><a href="#"><i class="fa fa-bar-chart-o"></i>
+							Estadísticas<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="{%url 'eventos:cypanimales'%}"> Crecimiento
+									y Producción</a></li>
+							<li><a href="{%url 'eventos:eestadistica'%}">Animales</a></li>
+							
+							<li><a href="{%url 'eventos:listado'%}">Rodeos</a></li>
+						</ul></li>
+					<li><a  href="#"><i class="fa fa-files-o fa-fw"></i>
+							Reportes<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a target="_blank" href="{%url 'eventos:reportegen'%}">General</a></li>							
+						</ul></li>
+				</ul>
+				<!-- end side-menu -->
+			</div>
+			<!-- end sidebar-collapse -->
+		</nav>
+	</div>
+	{% endblock %} {% block content %} {% endblock %} 
+	{%block js%}
+	{%endblock%}
+	<!-- {%block footer%}
+	<footer class="alert alert-success">
+		<p align="center">Escuela Politécnica Nacional - Software
+			administración de ganado</p>
+	</footer>
+	{%endblock%} -->
+</body>
+
+<script type="text/javascript" src="{% static 'js/datatables.min.js'%}"></script>
+
+</html>

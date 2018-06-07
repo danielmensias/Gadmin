@@ -1,0 +1,19 @@
+{% extends 'base/base.html'%}
+<meta charset="UTF-8">	
+{% block content%}
+
+<div id="page-wrapper">
+	<div class="panel panel-danger">
+		<div class="panel-heading">Eliminar</div>
+		<form method="post">
+			{% csrf_token%}
+			
+			<h3>Esta seguro de eliminar el registro de: {{object.nombre}}</h3>
+
+			<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+			<a class="btn btn-default" href="{%url 'animal:ani_buscar'%}">Cancelar</a>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

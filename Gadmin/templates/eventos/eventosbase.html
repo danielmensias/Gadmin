@@ -1,0 +1,78 @@
+{% extends 'base/base.html'%}
+<meta charset="UTF-8">
+
+{% block content%}
+<style>
+h5 {color:white; margin:0px;}
+h6 {class:text-primary; background-color:gray;}
+img {width:100px; heigth:100px;}
+.muestra {width:250px; heigth:250px;}
+.contenedor_imagen {width:158px; background-color:teal;}
+.contenedor_imagen a {display:block; text-decoration: none; padding:10px}
+.contenedor_imagen a:hover {width:158px; background-color:aqua;}
+</style>
+
+<div id="page-wrapper">
+<div class="col-md-8 col-sm-8">		
+		{%if ani%}
+		<div class="jumbotron">
+		<h2 class="text-primary">Nombre animal: {{ani.nombre}}</h2>      
+		<p>Fecha de nacimiento: {{ani.fechanacimiento}} </p>
+		<p>Raza: {{ani.raza.nombre}}</p>      
+		<p>Peso inicial: {{ani.peso_inicial}} </p>
+		<p><img class="muestra" src="{{MEDIA_URL}}{{ani.imagen_animal}}" width="250" height="250"></p>
+		</div>
+		 
+		{%endif%}	    
+</div>
+
+<div class="col-md-4 col-sm-4">
+<div class="panel panel-info">
+	<div class="panel-heading">Eventos posibles:</div>
+	<div class="contenedor_imagen" align="center">
+		    <a href="{%url 'eventos:ecrecimiento' ani.id%}">
+			    <img src={{MEDIA_URL}}{{'iconos/pesaje.png'}} />		    
+			    <h5>Crecimiento</h5>		    
+		    </a>
+		</div>
+		
+		<div class="contenedor_imagen" align="center">
+		    <a href="{%url 'eventos:eproduccion' ani.id%}">
+			    <img src={{MEDIA_URL}}{{'iconos/leche.png'}} />		    
+			    <h5>Producción</h5>		    
+		    </a>
+		</div>
+		
+		<div class="contenedor_imagen" align="center">
+		    <a href="{%url 'eventos:einseminacion' ani.id%}">
+			    <img src={{MEDIA_URL}}{{'iconos/reproduccion.png'}} />		    
+			    <h5>Inseminación</h5>		    
+		    </a>
+		</div>
+		
+		<div class="contenedor_imagen" align="center">
+		    <a href="{%url 'eventos:esanitario' ani.id%}">
+			    <img src={{MEDIA_URL}}{{'iconos/revision.png'}} />		    
+			    <h5>Revisión</h5>		    
+		    </a>
+		</div>
+		
+		<div class="contenedor_imagen" align="center">
+		    <a href="{%url 'eventos:evacunar' ani.id%}">
+			    <img src={{MEDIA_URL}}{{'iconos/vacuna.png'}} />		    
+			    <h5>Vacunación</h5>		    
+		    </a>
+		</div>
+		
+<!-- 		<div class="contenedor_imagen" align="center"> -->
+<!-- 		    <a href="#"> -->
+<!-- 			    <img src={{MEDIA_URL}}{{'iconos/pendiente.png'}} />		     -->
+<!-- 			    <h5>Registrar celo</h5>		     -->
+<!-- 		    </a> -->
+<!-- 		</div> -->
+		
+	</div>
+</div>
+</div>
+{% endblock %}
+

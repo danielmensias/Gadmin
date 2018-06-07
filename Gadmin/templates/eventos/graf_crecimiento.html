@@ -1,0 +1,125 @@
+{% extends 'base/base.html'%}
+<meta charset="UTF-8">
+{%block extrastatic%}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+{%endblock%}
+
+{% block content%}
+
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Crecimiento</h3>
+				</div>
+				<div class="box-body">
+					<div>
+						<canvas id="Grafcrecer"></canvas>
+					</div>
+					<div class="box-footer">
+					
+					<p>{{avgpeso}}</p>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Producción</h3>
+				</div>
+				<div class="box-body">
+					<div>
+						<canvas id="Grafprod"></canvas>
+					</div>
+				</div>
+				<div class="box-footer">
+					
+					<p>{{avgproduccion}}</p>
+					
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+{%endblock%}
+{%block js%}
+<script>
+	    (function() {
+	        var ctx = document.getElementById('Grafcrecer').getContext('2d');
+	        var chart = new Chart(ctx, {
+	            type: 'line',
+	            data: {	            	            
+	                labels:["{{pesoinicial.fechanacimiento}}",{% for f in peso %} "{{ f.fecha_medida }}", {% endfor %}],
+	                datasets: [{
+	                    label: 'Crecimiento',
+	                    borderColor: "#3e95cd",
+	                    backgroundColor:"#3e95cd",
+	                    data: [{{pesoinicial.peso_inicial}},{% for p in peso %} {{ p.peso }}, {% endfor %}]
+	                }]
+	        
+	            },	
+	            options : {
+	                scales: {
+	                  yAxes: [{
+	                    scaleLabel: {
+	                      display: true,
+	                      labelString: 'Peso (Kg)'
+	                    }
+	                  }],
+	                  xAxes: [{
+		                    scaleLabel: {
+		                      display: true,
+		                      labelString: 'Fecha registro'
+		                    }
+		                  }]
+	                }
+	              }
+	        });
+	    })();
+</script>
+
+<script>
+	    (function() {
+	        var ctx = document.getElementById('Grafprod').getContext('2d');
+	        var chart = new Chart(ctx, {
+	            type: 'line',
+	            data: {	            	            
+	                labels:[{% for f in volumenes %} "{{ f.fecha_produccion }}", {% endfor %}],
+	                datasets: [{
+	                    label: 'Volumen produccion',
+	                    borderColor: "#8e5ea2",
+	                    backgroundColor:"#8e5ea2",
+	                    data: [{% for v in volumenes %} {{ v.volumen }}, {% endfor %}]
+	                }]
+	        
+	            },
+	            options : {
+	                scales: {
+	                  yAxes: [{
+	                    scaleLabel: {
+	                      display: true,
+	                      labelString: 'Volumen (lt)'
+	                    }
+	                  }],
+	                  xAxes: [{
+		                    scaleLabel: {
+		                      display: true,
+		                      labelString: 'Fecha registro'
+		                    }
+		                  }]
+	                }
+	              }
+	        });
+	    })();
+</script>
+{%endblock%}
+
+	

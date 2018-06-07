@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %} {%block content%}
+<meta charset=UTF-8>
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-md-10 col-sm-8 col-sm-offset-1">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<div class="box-title">Listado</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table" id="tabla">
+						<thead>
+							<tr>
+								<td>ID</td>
+								<td>Nombre</td>
+								<td>Apellido</td>
+								<td>Cédula</td>
+								<td>Telefono</td>
+								<td>Correo</td>
+								<td>Acciones</td>
+							</tr>
+						</thead>
+						<tbody>
+							{%if object_list%} {%for obj in object_list%}
+							<tr>
+								<td>{{obj.id}}
+								<td>{{obj.nombre_tecnico}}</td>
+								<td>{{obj.apellido_tecnico}}</td>
+								<td>{{obj.cedula}}</td>
+								<td>{{obj.telefono}}</td>
+								<td>{{obj.correo}}</td>
+								<td><a class="btn btn-primary"
+									href="{%url 'configuracion:tec_editar' obj.id%}">Editar</a> <a
+									class="btn btn-danger"
+									href="{%url 'configuracion:tec_borrar' obj.id%}">Eliminar</a></td>
+							</tr>
+							{%endfor%} {%else%}
+							<h1>No existen registros</h1>
+							{%endif%}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{%endblock%}

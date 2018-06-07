@@ -1,0 +1,25 @@
+{% extends 'base/base.html'%}
+
+{% block content%}
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="box box-primary ">
+				<div class="box-header with-border">
+					<div class="box-title">Ingreso nuevo registro</div>
+				</div>
+				<form method="post">
+					{% csrf_token%}
+					<div class="box-body">
+					 {{ form.as_p }}
+					 </div>
+					 <div class="box-footer">
+					<button type="submit" class="btn btn-success">Guardar</button>
+					<a href="javascript:history.go(-1)" class="btn btn-danger">Cancelar</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

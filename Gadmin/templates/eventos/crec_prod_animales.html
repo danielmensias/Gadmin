@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+<meta charset="UTF-8">
+	
+{%block content%}
+<div id="page-wrapper">
+<div class="row">
+	<div class="col-md-12 col-sm-12">                        
+		<table id="tabla">
+			<thead>
+				<tr align="center">
+					<td>ID</td>
+					<td>Nombre</td>
+					<td>Fecha nacimiento</td>
+					<td>Peso inicial(Kg)</td>
+					<td>Raza</td>
+					<td>Tipo</td>
+					<td>Acciones</td>
+				</tr>
+			</thead>
+			<tbody>
+				{%if object_list%}
+				{%for animal in object_list%}
+				<tr class="active" align="center">
+					<td align="left">{{animal.id}}</td>
+					<td>{{animal.nombre}}</td>
+					<td>{{animal.fechanacimiento}}</td>
+					<td>{{animal.peso_inicial}}</td>
+					<td>{{animal.raza.nombre}}</td>
+					<td>{{animal.tipo.nombre}}</td>
+					<td>
+						<a class="btn btn-success" href="{%url 'eventos:anicrecer' animal.id%}">Ver Gráficas</a>						
+					</td>				
+				</tr>
+				{%endfor%}
+				{%else%}
+				<h1>No hay registros de animales</h1>
+				{%endif%}
+			</tbody>
+		</table>
+	</div>	
+</div> 
+</div>
+{%endblock%}

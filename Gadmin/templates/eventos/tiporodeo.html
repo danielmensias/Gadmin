@@ -1,0 +1,79 @@
+{% extends 'base/base.html'%}
+<meta charset="UTF-8">
+{%block extrastatic%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+{%endblock%}
+
+{%block content%}
+
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-md-5 col-md-offset-3">
+			<div class="box box-secondary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Tipos de rodeo</h3>
+				</div>
+				<div class="box-body">
+					<div>
+						<canvas id="tiposrodeos"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{%endblock%}
+
+{%block js%}
+	<script>
+	    (function() {
+	        var ctx = document.getElementById('tiposrodeos').getContext('2d');
+	        var chart = new Chart(ctx, {
+	            type: 'doughnut',
+	            data: {
+	                labels: [{% for i in tiporodeo %} "{{ i }}", {% endfor %}],
+	                datasets: [{
+	                    label: 'Tipos de rodeo',
+	                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+	                    data: [{% for item_value in cantidad %} {{ item_value }}, {% endfor %}]
+	                }],
+	                
+	            },
+	            options: {
+	                legend: {
+	                    display: true
+	                },
+	                events: true,
+	                animation: {                   
+	                    onComplete: function () {
+	                        var ctx = this.chart.ctx;
+	                        ctx.font='14px LatoRegular, Helvetica,sans-serif';
+	                        ctx.textAlign = 'center';
+	                        ctx.textBaseline = 'bottom';
+	                        this.data.datasets.forEach(function (dataset) {
+	                            for (var i = 0; i < dataset.data.length; i++) {
+	                                var m = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+	                                        t = dataset._meta[Object.keys(dataset._meta)[0]].total,
+	                                     mR = m.innerRadius +(m.outerRadius - m.innerRadius) / 2,
+	                                    sA = m.startAngle,
+	                                    eA = m.endAngle,
+	                                    mA = sA + (eA - sA)/2;
+	                                var x = mR * Math.cos(mA);
+	                                var y = mR * Math.sin(mA);
+	                                ctx.fillStyle = '#fff';
+
+	                                var p = String(Math.round(dataset.data[i]/t*100)) + "%";
+	                                if(dataset.data[i] > 0) {
+	                                    ctx.fillText(dataset.data[i], m.x + x, m.y + y-10);
+	                                    ctx.fillText(p, m.x + x, m.y + y + 5);
+	                                }
+	                            }
+	                        });
+	                    }
+	                }
+	            }
+	        });
+	    })();
+	</script>
+{%endblock%}

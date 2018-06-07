@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %} {%block content%}
+<meta charset=UTF-8>
+<div id="page-wrapper">
+	<div class="col-md-12">
+		<div class="box box-secondary">
+			<div class="box-header with-border">
+				<div class="box-title">Listado animales</div>
+			</div>
+			<div class="table-responsive">
+			<table class="table" id="tabla">
+				<thead>
+					<tr align="center">
+						<td>#</td>
+						<td>Tipo de evento</td>
+						<td>Descripcion</td>
+						<td>Fecha a realizarse</td>
+						<td>Animal</td>
+						<td>Técnico</td>
+					</tr>
+				</thead>
+				<tbody>
+					{%if eventos%} {%for obj in eventos%}
+					<tr align="center">
+						<td>{{obj.id}}
+						<td>{{obj.tipo_sanitario}}</td>
+						<td>{{obj.descripcion}}</td>
+						<td>{{obj.fecha_evento}}</td>
+						<td>{{obj.id_animal}}</td>
+						<td>{{obj.id_tecnico}}</td>
+
+					</tr>
+					{%endfor%} {%else%}
+					<h1>No existen registros</h1>
+					{%endif%}
+				</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+</div>
+{%endblock%}

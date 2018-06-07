@@ -1,0 +1,47 @@
+{% extends 'base/base.html'%}
+<meta charset="UTF-8">
+	
+{% block content%}
+<div id="page-wrapper">
+	<div class="row" style="padding-top: 50px">
+		<div class="col-md-3 col-sm-3 col-sm-offset-1">
+			<div class="contenedor">
+				<img src="{{MEDIA_URL}}{{'fondo2gadmin.jpg'}}">
+				<div class="tr">
+					<p class="texto">ANIMALES: {{todos}}</p>
+				</div>
+				<div class="acciones">
+					<a href="{%url 'animal:ani_listar'%}" class="fa fa-eye"></a>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="contenedor">
+				<img src="{{MEDIA_URL}}{{'fondo2gadmin.jpg'}}">
+				<div class="tr">
+					<p class="texto">TIPOS RODEOS</p>
+				</div>
+				<div class="acciones">
+					<a href="{%url 'configuracion:tipo_listar'%}" class="fa fa-eye"></a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3 col-sm-3">
+			<div class="contenedor">
+				<img src="{{MEDIA_URL}}{{'fondo2gadmin.jpg'}}">
+				<div class="tr">
+					<p class="texto">ESTADISTICAS</p>
+				</div>
+				<div class="acciones">
+					<a href="{%url 'eventos:cypanimales'%}" class="fa fa-eye"></a>
+				</div>
+			</div>
+		</div>
+		
+	</div>	
+</div>
+
+          
+{%endblock%}

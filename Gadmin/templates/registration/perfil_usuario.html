@@ -1,0 +1,71 @@
+{%extends 'base/base.html'%}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Perfil Usuario</title>
+</head>
+{%block content%}
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-md-9 col-md-offset-1">
+			<div class="box box-primary ">
+				<div class="box-header with-border">
+					<div class="box-title">Perfil usuario</div>
+				</div>
+				<form method="post" enctype="multipart/form-data">
+					{%csrf_token%}
+					<div class="row">
+					<div class="form-group">
+							<label class="col-sm-3 control-label ">Nombre:</label>
+							<div class="col-sm-6">
+							{%if user.first_name%} 
+							<input type="text" name="first_name" id="id_firstname" class="form-control" value={{user.first_name}}>
+							{%else%}
+							<input type="text" name="first_name" id="id_firstname" class="form-control" placeholder="Ingrese su nombre">
+							{%endif%}
+						</div>
+					</div>
+					</div>
+					<div class="row">
+					<div class="form-group">
+					
+							<label class="col-sm-3 control-label ">Apellido:</label>
+							<div class="col-sm-6">
+							{%if user.last_name%} 
+							<input type="text" name="last_name" id="id_lastname" class="form-control" value={{user.last_name}}>
+							{%else%}
+							<input type="text" name="last_name" id="id_lastname" class="form-control" placeholder="Ingrese su apellido">
+							{%endif%}
+						</div>
+					</div>
+					</div>
+					<div class="row">
+					<div class="form-group">
+							<label class="col-sm-3 control-label ">Nick Name:</label>
+							<div class="col-sm-6">
+						<input type="text" name="username" id="user" class="form-control" maxlength="70" value={{user.username}}>
+						</div>
+					</div>
+					</div>
+					<div class="row">
+					<div class="form-group">
+							<label class="col-sm-3 control-label ">Email:</label>
+							<div class="col-sm-6">
+							{%if user.email%}
+							<input type="email" name="email" id="id_mail" class="form-control" maxlength="70" value={{user.email}}>
+							{%else%}
+						<input type="email" name="email" id="id_mail" class="form-control" maxlength="70" placeholder="Ingrese un correo">
+						{%endif%}
+						</div>
+					</div> 
+					</div>
+					<button type="submit" class="btn btn-success" style="padding-right: 50" >Guardar</button>
+			</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+{%endblock%}
+</html>
